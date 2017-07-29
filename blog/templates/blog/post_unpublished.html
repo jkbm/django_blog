@@ -1,0 +1,45 @@
+{% block content %}
+<style>
+.up_post{
+    padding: 20px;
+    color: antiquewhite;
+}
+.up_post a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+.container{
+    background: black;
+    height: 100%;
+}
+.container h1{
+    color: whitesmoke;
+    text-align: center;
+}
+body {
+    margin: 0;
+}
+</style>
+<div class='container'>
+    <h1>untitled unmastered</h1>
+{% for post in posts %}
+    {% if not post.published_date %}
+        <div class="up_post">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+            {% if post.edited_date %}
+                <div class="date" style="color:aliceblue">
+                    Edited on: {{ post.edited_date }} | By {{ post.author }}, {{ post.author.first_name}} {{ post.author.last_name}} 
+                </div>
+            {% elif post.published_date %}
+                <div class="date">
+                    Published on: {{ post.published_date }} 
+                </div>                
+            {% endif %}
+            Created by: {{ post.author }}, {{ post.author.first_name}} {{ post.author.last_name}}
+            <hr>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
