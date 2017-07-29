@@ -25,7 +25,7 @@ SECRET_KEY = 'w_0_m$0$bask+wh*w)ntrn_by#w&t&ao-9l4f6q+tu6$!ml+x-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["peaceful-cove-46794.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["still-bayou-89258.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
