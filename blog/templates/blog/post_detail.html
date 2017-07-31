@@ -15,9 +15,10 @@
         {% elif post.published_date %}
             <div class="date">
                 {{ post.published_date }} | {{ post.author }}, {{ post.author.first_name}} {{ post.author.last_name}} 
-            </div>
+            </div>            
         {% endif %}
-             <a style='float:right;' class="btn btn-default" href="{% url 'post_comment' pk=post.pk %}">Comment</a>
+            <div>Tags: {% for tag in tags %}<a href = "{% url 'post_tag' tag=tag %}">{{tag}}, </a>{% endfor %}</div>
+            <a style='float:right;' class="btn btn-default" href="{% url 'post_comment' pk=post.pk %}">Comment</a>
     </div>
     <div class="comments">
         <h2>Comments:</h2>

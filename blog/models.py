@@ -14,6 +14,8 @@ class Post(models.Model):
             blank=True, null=True)
     edited_date = models.DateTimeField(
             blank=True, null=True)
+    tags = models.CharField(
+            max_length=400, blank=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now()

@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^untitled_unmastered/$', views.post_unpublished, name='post_unpublished'),
     url(r'^post/(?P<pk>\d+)/comment/$', views.post_comment, name='post_comment'),
+    url(r'^post/(?P<tag>[\w.-]+)/$', views.post_tags, name = 'post_tag'),
 
 ]

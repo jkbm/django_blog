@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import PostForm,CommentForm
+import string
 
 # Create your views here.
 from django.utils import timezone
@@ -12,7 +13,9 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(published_date__lte=timezone.now(), post = post).order_by('-published_date')
-    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
+    tags = post.tags.replace(',','').split()
+    print (tags)
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments, 'tags' : tags})
 
 def post_new(request):
     if request.method == "POST":
@@ -58,5 +61,11 @@ def post_comment(request, pk):
     else:
         form = CommentForm()
     return render(request, 'blog/post_comment.html', {'form' : form})
+
+def post_tags(request, tag):
+    posts = Post.objects.filter(tags__icontains=tag).order_by('published_date')
+
+
+    return render(request, 'blog/post_list.html', {'posts' : posts,})
 
 
