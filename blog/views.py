@@ -13,7 +13,9 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(published_date__lte=timezone.now(), post = post).order_by('-published_date')
-    tags = post.tags.replace(',','').split()
+    tags = []
+    if post.tags:
+        tags = post.tags.replace(',','').split()
     print (tags)
     return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments, 'tags' : tags})
 
