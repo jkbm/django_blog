@@ -8,17 +8,19 @@
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
+        <div>Tags: {% for tag in tags %}<a href = "{% url 'post_tag' tag=tag %}">{{tag}}, </a>{% endfor %}</div>
         {% if post.edited_date %}
             <div class="date">
                 Edited on: {{ post.edited_date }} | By {{ post.author }}, {{ post.author.first_name}} {{ post.author.last_name}} 
-            </div>
+            </div>            
         {% elif post.published_date %}
             <div class="date">
                 {{ post.published_date }} | {{ post.author }}, {{ post.author.first_name}} {{ post.author.last_name}} 
-            </div>            
-        {% endif %}
-            <div>Tags: {% for tag in tags %}<a href = "{% url 'post_tag' tag=tag %}">{{tag}}, </a>{% endfor %}</div>
-            <a style='float:right;' class="btn btn-default" href="{% url 'post_comment' pk=post.pk %}">Comment</a>
+            </div>    
+        {% else %}        
+            <a style='float:right;' class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>        
+        {% endif %}            
+        <div><a style='float:right;' class="btn btn-default" href="{% url 'post_comment' pk=post.pk %}">Comment</a></div>
     </div>
     <div class="comments">
         <h2>Comments:</h2>
